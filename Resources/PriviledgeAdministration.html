@@ -1,0 +1,85 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Priviledge Administration</title>
+
+    <script>
+      function submitUpdPriv() {
+        var frm = document.UpdPriv;
+
+        var json_dict = {};
+
+        json_dict["MOD_MELLON_uid"] = frm.usermail.value;
+        json_dict["MOD_MELLON_name"] = frm.username.value;
+        json_dict["access-level"] = frm.privselect.value;
+
+        // construct an HTTP request
+        var xhr = new XMLHttpRequest();
+        xhr.open(frm.method, frm.action, false);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        // send the collected data as JSON
+        var json_str = JSON.stringify(json_dict);
+        xhr.send(json_str);
+      }
+
+      function refreshUpdPriv() {
+        var frm = document.UpdPriv;
+        frm.usermail.value = "";
+        frm.username.value = "";
+        frm.privselect.value = 1;
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>User Administration</h1>
+
+    <h2>Change Priviledges</h2>
+
+    <!-- <form name="UpdPriv" action="/authorisation/userAdministration/" method="post"> -->
+    <form name="UpdPriv" action="http://localhost:8000/userAdministration/" method="POST" autocomplete="on">
+      <table>
+        <tr>
+          <td>
+            <b>User Mail Address</b>
+          </td>
+          <td>
+            <input type="text" name="usermail">
+          </td>
+        </tr>
+        <tr>
+            <td>
+              <b>User Name</b>
+            </td>
+            <td>
+              <input type="text" name="username">
+            </td>
+            <tr>
+          <td>
+            <b>Priviledges</b>
+          </td>
+          <td>
+            <select name="privselect">
+              <option value=1>Student</option>
+              <option value=2>Nurse</option>
+              <option value=3>Physician</option>
+              <option value=4>Administrator</option>
+            </select>
+          </td>
+          <tr>
+          <tr>
+            <td>
+              <input type="button" onclick="refreshUpdPriv()" value="Refresh">
+            </td>
+            <td>
+              <input type="button" onclick="submitUpdPriv()" value="Submit">
+            </td>
+          </tr>
+
+        </tr>
+    </form>
+</html>
+</body>
