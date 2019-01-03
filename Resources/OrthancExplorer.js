@@ -93,7 +93,7 @@ $('#patient').live('pagebeforecreate', function() {
 
 function getPatientId() {
 
-      var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5"; //window.location.href
+      var url_string = window.location.href;
       var url = new URL(url_string);
       var uuid = url.searchParams.get("uuid");
 
@@ -118,8 +118,8 @@ function grant_access_click() {
   select = document.getElementById("user-select");
 
 
-  json_dict["patient-id"] = getPatientId();
-  json_dict["MELLON_uid"] = select.value;
+  json_dict["orthanc-id"] = getPatientId();
+  json_dict["MOD_MELLON_uid"] = select.value;
 
   // construct an HTTP request
   var xhr = new XMLHttpRequest();
@@ -136,8 +136,8 @@ function retreat_access_click() {
 
   select = document.getElementById("user-select");
 
-  json_dict["patient-id"] = getPatientId();
-  json_dict["MELLON_uid"] = select.value;
+  json_dict["orthanc-id"] = getPatientId();
+  json_dict["MOD_MELLON_uid"] = select.value;
 
   // construct an HTTP request
   var xhr = new XMLHttpRequest();
