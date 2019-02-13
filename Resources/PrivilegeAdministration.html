@@ -1,20 +1,28 @@
 <!doctype html>
 
+<!--
+Unfinished Web formular to update user groups
+in the access providing service
+!-->
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Priviledge Administration</title>
+    <title>Privilege Administration</title>
 
     <script>
+      // Function to submit user group updates as a json
       function submitUpdPriv() {
         var frm = document.UpdPriv;
 
         var json_dict = {};
 
+        // Fill the json dictionary
         json_dict["MOD_MELLON_uid"] = frm.usermail.value;
         json_dict["MOD_MELLON_name"] = frm.username.value;
         json_dict["access-level"] = frm.privselect.value;
 
+        // Send the requests from java script...
         // construct an HTTP request
         var xhr = new XMLHttpRequest();
         xhr.open(frm.method, frm.action, false);
@@ -25,6 +33,7 @@
         xhr.send(json_str);
       }
 
+      // Refresh the form by resetting the input
       function refreshUpdPriv() {
         var frm = document.UpdPriv;
         frm.usermail.value = "";
@@ -39,7 +48,10 @@
 
     <h2>Change Priviledges</h2>
 
-    <!-- <form name="UpdPriv" action="/authorisation/userAdministration/" method="post"> -->
+    <!--
+    A form to send the request as Post to the local access providing service
+    Probably not working yet!
+    !-->
     <form name="UpdPriv" action="http://localhost:8000/userAdministration/" method="POST" autocomplete="on">
       <table>
         <tr>
